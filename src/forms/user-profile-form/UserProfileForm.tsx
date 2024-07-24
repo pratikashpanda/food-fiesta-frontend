@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,7 +14,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { User } from "@/types";
-// import { useEffect } from "react";
 import LoadingButton from "@/components/LoadingButton";
 
 const formSchema = z.object({
@@ -39,6 +39,10 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues: currentUser,
   });
+
+  useEffect(() => {
+    form.reset(currentUser);
+  }, [currentUser, form]);
 
   return (
     <Form {...form}>
@@ -79,7 +83,7 @@ const UserProfileForm = ({ onSave, isLoading, currentUser }: Props) => {
             </FormItem>
           )}
         />
-        
+
         <div className="flex flex-col md:flex-row gap-4">
           <FormField
             control={form.control}
