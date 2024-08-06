@@ -12,7 +12,6 @@ import { Button } from "./ui/button";
 
 const UsernameMenu = () => {
   const { user, logout } = useAuth0();
-  console.log(user);
 
   return (
     <DropdownMenu>
